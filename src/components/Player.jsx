@@ -43,6 +43,8 @@ export default function Player() {
   
   function handleClick() {
     setEnteredPlayerName(playerName.current.value);
+    playerName.current.value = ''; // clearing the text area whenver the set name button is clicked.
+    // v r here voilating a rule of react that it should handle things by its own.
   }
 
   return (
