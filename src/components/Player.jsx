@@ -14,7 +14,7 @@
 //   function handleChange (event) {
 //     setSubmitted(false); // done cuz if it is not done so the whenever the input field changes the target position will also changes so it restrict for doing so and the submitted value is in 
 //     // false state so it will reflect the unkonown entity only right now. 
-    
+
 //     setEnteredPlayerName(event.target.value);
 //   }
 //   return (
@@ -34,26 +34,47 @@
   `onChange` event and reflecting the latest value in real-time, which ensures reactivity. The second snippet uses `useRef` to directly reference the DOM element, avoiding state updates during input changes and only capturing the value when the button is clicked.
   While the `useState` approach ensures controlled input and real-time state synchronization, the `useRef` approach is simpler and avoids unnecessary re-renders but sacrifices reactivity for the input value. */}
 
+// import { useState, useRef } from 'react';
+
+// export default function Player() {
+
+//   const playerName = useRef();
+//   const [enteredPlayerName, setEnteredPlayerName] = useState(null);
+
+//   function handleClick() {
+//     setEnteredPlayerName(playerName.current.value);
+//     playerName.current.value = ''; // clearing the text area whenver the set name button is clicked.
+//     // v r here voilating a rule of react that it should handle things by its own.
+//   }
+
+//   return (
+//     <section id="player">
+//       <h2>Welcome {enteredPlayerName ?? 'unknown entity'}</h2>
+//       <p>
+//         <input type="text" 
+//         ref={playerName} 
+//         />
+//         <button onClick={handleClick}>Set Name</button>
+//       </p>
+//     </section>
+//   );
+// }
 import { useState, useRef } from 'react';
 
 export default function Player() {
-
   const playerName = useRef();
   const [enteredPlayerName, setEnteredPlayerName] = useState(null);
-  
+
   function handleClick() {
     setEnteredPlayerName(playerName.current.value);
-    playerName.current.value = ''; // clearing the text area whenver the set name button is clicked.
-    // v r here voilating a rule of react that it should handle things by its own.
+    playerName.current.value = ''; // Clearing the text input
   }
 
   return (
     <section id="player">
       <h2>Welcome {enteredPlayerName ?? 'unknown entity'}</h2>
       <p>
-        <input type="text" 
-        ref={playerName} 
-        />
+        <input type="text" ref={playerName} />
         <button onClick={handleClick}>Set Name</button>
       </p>
     </section>
